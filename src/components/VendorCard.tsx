@@ -15,7 +15,7 @@ function getInitials(name: string) {
 
 export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
   return (
-    <Card className="group bg-card border border-gray-300 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-xl overflow-hidden">
+    <Card className="group bg-white border border-gray-300 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-xl overflow-hidden">
       <CardContent className="p-6 flex flex-col h-full">
         {/* Top: Avatar & Verification */}
         <div className="flex justify-between gap-2 mb-4">
@@ -27,7 +27,7 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
                 className="w-12 h-12 rounded-full object-cover border border-muted shadow-sm"
               />
             ) : (
-              <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-lg font-bold text-primary border border-muted shadow-sm shrink-0">
+              <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-xs font-bold text-primary border border-gray-300 shadow-sm shrink-0">
                 {getInitials(vendor.companyName)}
               </div>
             )}
@@ -74,7 +74,7 @@ export const VendorCard = ({ vendor }: { vendor: Vendor }) => {
         {/* Action button */}
         <Button
           variant="default"
-          className="w-full font-semibold text-base py-2 rounded-lg shadow-sm group-hover:bg-primary/90 group-hover:scale-[1.02] transition-all"
+          className="w-full font-medium text-base py-2 rounded-lg shadow-sm group-hover:bg-primary/90 group-hover:scale-[1.02] transition-all border hover:border-blue-700 hover:text-blue-700"
         >
           View Details
         </Button>

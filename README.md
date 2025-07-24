@@ -1,69 +1,52 @@
-# React + TypeScript + Vite
+# Vendor Directory – Setup & Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Setup Instructions
 
-Currently, two official plugins are available:
+1. **Install dependencies**  
+   Run the following command in your project root:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+   ```bash
+   npm install
+   ```
 
-## Expanding the ESLint configuration
+2. **Start the development server**  
+   Launch the app locally with:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   ```bash
+   npm run dev
+   ```
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   This will start Vite’s development server. Open the provided local URL (usually `http://localhost:5173`) in your browser.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+3. **Lint your code**  
+   To check for code quality and style issues, run:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   ```bash
+   npm run lint
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+4. **Build for production**  
+   To create an optimized production build:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   npm run build
+   ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+5. **Preview the production build**  
+   After building, you can preview the production build locally:
+   ```bash
+   npm run preview
+   ```
+
+> **Requirements:**
+>
+> - Node.js (v18+ recommended)
+> - npm (v9+ recommended)
+
+---
+
+## Project Overview & Approach
+
+This project is a modern React + TypeScript application bootstrapped with Vite for fast development and hot module reloading. It uses Tailwind CSS for utility-first styling and includes a custom UI component library for consistent design. The main feature is a **Vendor Directory**: a searchable, filterable list of business partners, with each vendor displayed in a card format. Users can filter vendors by industry, search by company name, and toggle to show only verified vendors.
+
+The codebase is organized for scalability and maintainability. Components are modular and reusable, with clear separation between UI, logic, and data. TypeScript ensures type safety across the app, and ESLint is configured for both JavaScript and React best practices. The project uses Vite’s aliasing for clean imports and includes sample data for immediate exploration. This setup provides a solid foundation for further extension, such as integrating a backend or expanding the UI.

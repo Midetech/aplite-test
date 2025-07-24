@@ -1,4 +1,4 @@
-export interface Vendor {
+export type Vendor = {
     id: string;
     companyName: string;
     industry: string;
