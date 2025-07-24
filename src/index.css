@@ -30,11 +30,28 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "Manrope", sans-serif;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.4em;
+  line-height: 1.1;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1em;
+  line-height: 1.1;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,4 +62,36 @@ h1 {
   a:hover {
     color: #747bff;
   }
+}
+
+.manrope-regular {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.manrope-medium {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.manrope-semibold {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.manrope-bold {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
 }
