@@ -18,6 +18,7 @@ interface SearchAndFilterProps {
   clearFilters: () => void;
   pendingOnly: boolean;
   setPendingOnly: (value: boolean) => void;
+  loading?: boolean;
 }
 
 const SearchAndFilter = ({
@@ -33,10 +34,11 @@ const SearchAndFilter = ({
   clearFilters,
   pendingOnly,
   setPendingOnly,
+  loading = false,
 }: SearchAndFilterProps) => {
   const industries = Array.from(new Set(vendors.map((v) => v.industry)));
   return (
-    <div className="bg-white border border-gray-300 rounded-lg p-6 mb-8 shadow-sm w-full">
+    <div className="bg-white border border-gray-300 rounded-lg p-6 mb-8 shadow-sm w-full transition-all duration-300">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
         {/* Search Bar */}
         <div className="md:col-span-2">
@@ -47,14 +49,20 @@ const SearchAndFilter = ({
             Search Vendors
           </Label>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 transition-colors duration-200" />
             <Input
               id="search"
               placeholder="Search by company name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
+              className="pl-10 focus:ring-2 focus:ring-primary transition-all duration-200"
+              // disabled={loading}
             />
+            {/* {loading && (
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-muted-foreground animate-pulse">
+                Loading...
+              </span>
+            )} */}
           </div>
         </div>
 
@@ -70,7 +78,8 @@ const SearchAndFilter = ({
             id="industry"
             value={selectedIndustry}
             onChange={(e) => setSelectedIndustry(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md capitalize"
+            className="w-full p-2 border border-gray-300 rounded-md capitalize transition-all duration-200 focus:ring-2 focus:ring-primary hover:border-primary"
+            disabled={loading}
           >
             {["all industries", ...industries].map((industry) => (
               <option key={industry} value={industry}>
@@ -89,7 +98,6 @@ const SearchAndFilter = ({
             Status
           </Label>
           <div className="flex items-center space-x-2 h-10">
-            {" "}
             <div className="flex items-center space-x-2 h-10">
               <Switch
                 id="verified"
@@ -98,8 +106,13 @@ const SearchAndFilter = ({
                   setVerifiedOnly(value);
                   setPendingOnly(false);
                 }}
+                disabled={loading}
+                className="transition-all duration-200"
               />
-              <Label htmlFor="verified" className="text-sm text-foreground">
+              <Label
+                htmlFor="verified"
+                className="text-sm text-foreground cursor-pointer transition-colors duration-200 hover:text-primary"
+              >
                 Verified
               </Label>
             </div>
@@ -111,8 +124,13 @@ const SearchAndFilter = ({
                   setPendingOnly(value);
                   setVerifiedOnly(false);
                 }}
+                disabled={loading}
+                className="transition-all duration-200"
               />
-              <Label htmlFor="pending" className="text-sm text-foreground">
+              <Label
+                htmlFor="pending"
+                className="text-sm text-foreground cursor-pointer transition-colors duration-200 hover:text-primary"
+              >
                 Pending
               </Label>
             </div>
@@ -130,7 +148,8 @@ const SearchAndFilter = ({
             variant="outline"
             size="sm"
             onClick={clearFilters}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+            disabled={loading}
           >
             <X className="w-4 h-4 mr-2" />
             Clear Filters
