@@ -16,6 +16,8 @@ interface SearchAndFilterProps {
   vendors: Vendor[];
   hasActiveFilters: string | boolean;
   clearFilters: () => void;
+  pendingOnly: boolean;
+  setPendingOnly: (value: boolean) => void;
 }
 
 const SearchAndFilter = ({
@@ -29,10 +31,12 @@ const SearchAndFilter = ({
   vendors,
   hasActiveFilters,
   clearFilters,
+  pendingOnly,
+  setPendingOnly,
 }: SearchAndFilterProps) => {
   const industries = Array.from(new Set(vendors.map((v) => v.industry)));
   return (
-    <div className="bg-white border border-gray-300 rounded-lg p-6 mb-8 shadow-sm">
+    <div className="bg-white border border-gray-300 rounded-lg p-6 mb-8 shadow-sm w-full">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
         {/* Search Bar */}
         <div className="md:col-span-2">
@@ -85,14 +89,33 @@ const SearchAndFilter = ({
             Status
           </Label>
           <div className="flex items-center space-x-2 h-10">
-            <Switch
-              id="verified"
-              checked={verifiedOnly}
-              onCheckedChange={setVerifiedOnly}
-            />
-            <Label htmlFor="verified" className="text-sm text-foreground">
-              Verified only
-            </Label>
+            {" "}
+            <div className="flex items-center space-x-2 h-10">
+              <Switch
+                id="verified"
+                checked={verifiedOnly}
+                onCheckedChange={(value) => {
+                  setVerifiedOnly(value);
+                  setPendingOnly(false);
+                }}
+              />
+              <Label htmlFor="verified" className="text-sm text-foreground">
+                Verified
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2 h-10">
+              <Switch
+                id="pending"
+                checked={pendingOnly}
+                onCheckedChange={(value) => {
+                  setPendingOnly(value);
+                  setVerifiedOnly(false);
+                }}
+              />
+              <Label htmlFor="pending" className="text-sm text-foreground">
+                Pending
+              </Label>
+            </div>
           </div>
         </div>
       </div>

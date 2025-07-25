@@ -11,7 +11,7 @@ export const VendorDirectory = () => {
   const [selectedIndustry, setSelectedIndustry] =
     useState<string>("all industries");
   const [verifiedOnly, setVerifiedOnly] = useState(false);
-
+  const [pendingOnly, setPendingOnly] = useState(false);
   const [vendors, setVendors] = useState<Vendor[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,22 +37,33 @@ export const VendorDirectory = () => {
         vendor.industry === selectedIndustry;
       const matchesVerification =
         !verifiedOnly || vendor.verificationStatus === "verified";
+      const matchesPending =
+        !pendingOnly || vendor.verificationStatus === "pending";
 
-      return matchesSearch && matchesIndustry && matchesVerification;
+      return (
+        matchesSearch &&
+        matchesIndustry &&
+        matchesVerification &&
+        matchesPending
+      );
     });
-  }, [searchTerm, selectedIndustry, verifiedOnly, vendors]);
+  }, [searchTerm, selectedIndustry, verifiedOnly, pendingOnly, vendors]);
 
   const clearFilters = () => {
     setSearchTerm("");
     setSelectedIndustry("all industries");
     setVerifiedOnly(false);
+    setPendingOnly(false);
   };
 
   const hasActiveFilters =
-    searchTerm || selectedIndustry !== "all industries" || verifiedOnly;
+    searchTerm ||
+    selectedIndustry !== "all industries" ||
+    verifiedOnly ||
+    pendingOnly;
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full p-2 max-w-7xl mx-auto">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-foreground mb-2">
@@ -75,7 +86,10 @@ export const VendorDirectory = () => {
         vendors={vendors}
         hasActiveFilters={hasActiveFilters}
         clearFilters={clearFilters}
+        pendingOnly={pendingOnly}
+        setPendingOnly={setPendingOnly}
       />
+
       {/* Vendor Grid */}
       {loading ? (
         <div className="flex justify-center items-center py-12">
